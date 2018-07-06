@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: Write config to device rather than just printing it out
+
 # USER VARIABLES
 IPV6_6RD_PREFIX="2602::/24"
 IPV6_6RD_BORDER_ROUTER="205.171.2.64/0"
@@ -29,6 +31,7 @@ IPV6_SUBNET=`ipv6calc --action 6rd_local_prefix --6rd_prefix ${IPV6_6RD_PREFIX} 
 IPV6_ADDR="${IPV6_SUBNET}1"
 IPV6_6RD_BORDER_ROUTER=`echo ${IPV6_6RD_BORDER_ROUTER} | cut -d'/' -f1`
 
+# Print Configuration
 echo "
 configure
 
@@ -89,4 +92,5 @@ set interfaces tunnel tun0 firewall in ipv6-name WAN6_IN
 set interfaces tunnel tun0 firewall local ipv6-name WAN6_LOCAL
 
 commit
+save
 "
